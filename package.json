@@ -1,0 +1,5 @@
+{
+  "name": "petal-and-pixie", "version": "1.0.0", "private": true,
+  "type": "module", "description": "A cozy pixel-art fairy flower shop",
+  "scripts": {"test": "node --test", "start": "python -m http.server 5175 --bind 127.0.0.1"}
+}
