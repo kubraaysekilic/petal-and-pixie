@@ -5,7 +5,38 @@ function rect(c,x,y,w,h,color){c.fillStyle=color;c.fillRect(Math.round(x),Math.r
 function oval(c,x,y,rx,ry,color){for(let yy=-ry;yy<=ry;yy+=3){const ww=Math.floor(rx*Math.sqrt(Math.max(0,1-yy*yy/(ry*ry)))/3)*3;rect(c,x-ww,y+yy,ww*2,3,color)}}
 function star(c,x,y,color='#fff5cb'){rect(c,x,y-3,1,7,color);rect(c,x-3,y,7,1,color);}
 export function flower(c,x,y,kind=0,size=1){c.save();c.translate(Math.round(x),Math.round(y));c.scale(size,size);rect(c,0,-1,2,13,'#68885f');rect(c,-4,5,5,2,'#87a573');rect(c,2,8,4,2,'#87a573');if(kind===2){rect(c,-2,-11,5,4,'#b39bd0');rect(c,-4,-6,7,4,'#9d87be');rect(c,-2,-2,6,3,'#c5b1dc');rect(c,-1,-12,2,3,'#e0ceef');}else{const petals=kind===0?'#eda7bc':'#fff1c2';rect(c,-3,-9,7,12,petals);rect(c,-6,-6,13,6,petals);rect(c,-3,-8,3,3,kind===0?'#f9cbda':'#fffbe7');rect(c,-1,-5,4,4,'#d6ad63');}c.restore();}
-export function fairy(c,x,y,variant=0,t=0,scale=1){c.save();c.translate(Math.round(x),Math.round(y));c.scale(scale,scale);const clothes=['#b59acb','#93b29b','#db9eb5','#d7b879'][variant%4];oval(c,-8,-4,7,8,'#dbe4e7');oval(c,9,-6,7,9,'#e6e9ee');rect(c,-13,-7,7,2,'#f9f0e8');rect(c,7,-9,7,2,'#faf0ee');rect(c,-4,3,8,10,clothes);rect(c,-7,11,14,3,clothes);rect(c,-4,14,3,5,'#bd977b');rect(c,2,14,3,5,'#bd977b');rect(c,-6,-13,12,13,'#aa8064');rect(c,-5,-9,10,10,'#f1c6a1');rect(c,-6,-13,12,5,variant===1?'#76694f':'#ab795c');rect(c,-7,-9,3,8,'#ab795c');rect(c,-2,-6,1,2,'#594f4e');rect(c,3,-6,1,2,'#594f4e');rect(c,-3,-2,2,1,'#df9d99');rect(c,3,-2,2,1,'#df9d99');rect(c,-8,4,3,7,'#f1c6a1');rect(c,5,3,3,7,'#f1c6a1');rect(c,-3,-15,9,2,'#80996c');flower(c,2,-17,variant%3,.5);if(t)star(c,17,-13+(Math.floor(t/500)%3),'#fff4bd');c.restore();}
+export function fairy(c,x,y,variant=0,t=0,scale=1){
+ c.save();c.translate(Math.round(x),Math.round(y));c.scale(scale,scale);
+ const v=variant%4;
+ const dress=['#b9a0d6','#94b9aa','#e8a8bc','#e7c28b'][v];
+ const light=['#e2cef3','#cce6d5','#ffd5df','#ffe2af'][v];
+ const hair=['#a67b69','#8d7760','#c39771','#ae8273'][v];
+ // Four rounded, translucent-looking petal wings, each with a bright vein.
+ oval(c,-11,-1,7,9,'#d1dce5');oval(c,11,-1,7,9,'#d1dce5');
+ oval(c,-12,-3,5,7,'#edf0f1');oval(c,12,-3,5,7,'#edf0f1');
+ oval(c,-9,7,5,5,'#e4dcef');oval(c,9,7,5,5,'#e4dcef');
+ rect(c,-14,-5,2,7,'#fff9f2');rect(c,12,-5,2,7,'#fff9f2');
+ // Tiny shoes, short legs and a scalloped petal dress.
+ rect(c,-4,13,3,5,'#f3cfb4');rect(c,2,13,3,5,'#f3cfb4');
+ rect(c,-5,17,4,2,dress);rect(c,2,17,4,2,dress);
+ rect(c,-5,2,10,7,dress);rect(c,-7,8,14,5,dress);
+ rect(c,-8,11,5,4,light);rect(c,-3,10,6,6,light);rect(c,3,11,5,4,light);
+ rect(c,-4,3,8,2,light);rect(c,-1,3,2,3,'#fff3c5');
+ rect(c,-8,4,3,5,'#f3cfb4');rect(c,5,4,3,5,'#f3cfb4');
+ // Chibi proportions: soft hair silhouette, big bright eyes and rosy cheeks.
+ oval(c,0,-10,10,11,hair);rect(c,-8,-15,16,14,'#f4d0b4');rect(c,-6,-2,12,3,'#f4d0b4');
+ rect(c,-9,-18,18,5,hair);rect(c,-9,-14,3,9,hair);rect(c,7,-14,3,9,hair);
+ rect(c,-6,-14,4,2,hair);rect(c,-3,-14,4,3,hair);rect(c,1,-14,5,2,hair);
+ rect(c,-6,-9,3,4,'#65545c');rect(c,3,-9,3,4,'#65545c');
+ rect(c,-6,-9,1,2,'#fffaf2');rect(c,3,-9,1,2,'#fffaf2');
+ rect(c,-8,-4,4,2,'#eaa5ad');rect(c,4,-4,4,2,'#eaa5ad');
+ rect(c,-1,-3,2,1,'#b37d7c');rect(c,0,-2,1,1,'#b37d7c');
+ // Flower crown, a little side curl and one golden sparkle.
+ rect(c,-8,-19,16,2,'#8eaa7e');rect(c,-10,-10,2,8,hair);rect(c,9,-8,2,6,hair);
+ for(const xx of [-5,2,7]){rect(c,xx-1,-21,3,5,light);rect(c,xx-2,-20,5,3,light);rect(c,xx,-19,1,1,'#d6ab61');}
+ if(t)star(c,20,-13+(Math.floor(t/500)%3),'#fff4bd');
+ c.restore();
+}
 function mushroom(c,x,y,s=1){c.save();c.translate(x,y);c.scale(s,s);rect(c,-2,0,5,11,'#f0dfb4');rect(c,-8,-3,17,4,'#a87477');rect(c,-6,-7,13,5,'#ca9190');rect(c,-3,-9,7,3,'#d9a29b');rect(c,-5,-5,3,2,'#f8dfba');rect(c,3,-4,3,2,'#f8dfba');c.restore();}
 function tree(c,x,y,s,color){c.save();c.translate(x,y);c.scale(s,s);rect(c,-4,0,9,63,'#8a9270');rect(c,2,10,3,50,'#a6aa7c');oval(c,0,4,30,39,color);oval(c,-18,13,22,25,color);oval(c,18,16,25,27,color);oval(c,-11,-5,17,22,'#a3b88a');c.restore();}
 function window(c,x,y){rect(c,x-3,y-3,39,44,'#8d8069');rect(c,x,y,33,38,'#f9d99f');rect(c,x+3,y+3,27,30,'#eec789');rect(c,x+4,y+4,10,11,'#fff0bc');rect(c,x+17,y+4,11,11,'#ffe6aa');rect(c,x+15,y,3,38,'#a29478');rect(c,x,y+17,33,3,'#a29478');rect(c,x-5,y+36,43,7,'#b69a79');}
